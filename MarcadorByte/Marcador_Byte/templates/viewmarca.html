@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Marca</title>
+    <!-- Agrega los enlaces a los archivos de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Formulario de Marca Byte</h2>
+    
+    <form method="post" action="{% url 'viewmarca' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="empleado_id">Empleado:</label>
+            <input type="text" class="form-control" id="empleado_id" name="empleado_id" placeholder="Ingrese su Numero de Empleado" required>
+        </div>
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+            <label for="hora">Hora:</label>
+            <input type="text" class="form-control" id="hora" name="hora" readonly>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Marca</button>
+    </form>
+    
+    <!-- Agrega el enlace al archivo de Bootstrap JS y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Script para actualizar la hora como un reloj -->
+    <script>
+        // Función para actualizar la hora actual en formato HH:mm
+        function actualizarHora() {
+            var ahora = new Date();
+            var horas = ahora.getHours().toString().padStart(2, '0');
+            var minutos = ahora.getMinutes().toString().padStart(2, '0');
+            var horaActual = horas + ':' + minutos;
+            document.getElementById('hora').value = horaActual;
+        }
+
+        // Actualizar la hora cada segundo
+        setInterval(actualizarHora, 1000);
+        
+        // Desactivar la edición del campo de la hora
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hora').readOnly = true;
+        });
+    </script>
+</div>
+
+</body>
+</html>
