@@ -8,7 +8,7 @@
         style="max-width: 20%; height: auto;">
     <h2>Formulario de Marca Byte</h2>
     
-    <form method="post" action="{% url 'viewmarca' %}">
+    <form method="post" action="{% url 'viewmarcasalida' %}">
         {% csrf_token %}
         <div class="form-group">
             <label for="empleado_id">Empleado:</label>
@@ -32,8 +32,6 @@
         {% endif %}
 
     </form>
-
-    
 
 
     <script>

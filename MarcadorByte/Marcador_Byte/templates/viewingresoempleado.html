@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Empleado</title>
-    <!-- Agrega los enlaces a los archivos de Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<body>
+{% extends "./index.html" %}
 
-<div class="container mt-5">
+
+{% block title %} Gestión de Cursos {% endblock %}
+{% block body %}
+
+<div class="container mt-" style="max-width: 400px;">
+
+    <img src="https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/pmieo5a4ueozrpxovutw" alt=""
+        style="max-width: 20%; height: auto;">
+
     <h2>Formulario de Empleado</h2>
-    
+
     <form method="post" action="{% url 'viewingresoempleado' %}">
         {% csrf_token %}
 
@@ -32,12 +31,12 @@
             <input type="text" class="form-control" id="apellido2" name="apellido2" required>
         </div>
         <button type="submit" class="btn btn-primary">Guardar Empleado</button>
-    </form>
-    
-    <!-- Agrega el enlace al archivo de Bootstrap JS y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</div>
+        {% if messages %}
+        {% for message in messages %}
+        <h2 style="color: green;">{{message}}</h2>
+        {% endfor %}
+        {% endif %}
 
-</body>
-</html>
+    </form>
+
+    {% endblock %}
