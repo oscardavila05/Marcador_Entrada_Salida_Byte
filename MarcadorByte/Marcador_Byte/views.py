@@ -7,6 +7,14 @@ from django.core.exceptions import ObjectDoesNotExist
 def index(request):
     return render(request, 'index.html')
 
+def ListaMarcasEntrada(request):
+    marcasentrada= Marcas.objects.all()
+    return render(request, 'tabla_marca_entrada.html',{'marcasentrada': marcasentrada})
+
+def ListaMarcasSalida(request):
+    marcassalida= Marcas2.objects.all()
+    return render(request, 'tabla_marca_salida.html',{'marcassalida': marcassalida})
+
 def viewmarca(request):
     if request.method == 'POST':
         empleado_id = request.POST.get('empleado_id')

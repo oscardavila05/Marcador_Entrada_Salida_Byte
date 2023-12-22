@@ -1,13 +1,12 @@
 {% extends "./index.html" %}
 
-
 {% block title %} Gestión de Cursos {% endblock %}
 {% block body %}
 <div class="container mt-3" style="max-width: 400px;">
     <img src="https://images.crunchbase.com/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/pmieo5a4ueozrpxovutw" alt=""
         style="max-width: 20%; height: auto;">
     <h2>Formulario de Marca Byte</h2>
-    
+
     <form method="post" action="{% url 'viewmarca' %}">
         {% csrf_token %}
         <div class="form-group">
@@ -17,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="fecha">Fecha:</label>
-            <input type="date" class="form-control" id="fecha" name="fecha" readonly required>
+            <input type="text" class="form-control" id="fecha" name="fecha" readonly required>
         </div>
         <div class="form-group">
             <label for="hora">Hora:</label>
@@ -33,26 +32,35 @@
 
     </form>
 
-    
-
 
     <script>
-        // Función para actualizar la hora actual en formato HH:mm
-        function actualizarHora() {
+        // Función para actualizar la fecha y hora actual en Costa Rica
+        function actualizarFechaHora() {
             var ahora = new Date();
-            var horas = ahora.getHours().toString().padStart(2, '0');
-            var minutos = ahora.getMinutes().toString().padStart(2, '0');
-            var horaActual = horas + ':' + minutos;
-            document.getElementById('hora').value = horaActual;
-
-            // Actualizar la fecha automáticamente
-            var fecha = ahora.toISOString().split('T')[0]; // Obtener la fecha en formato YYYY-MM-DD
+    
+            // Configurar la zona horaria de Costa Rica
+            var opcionesFechaHora = { timeZone: 'America/Costa_Rica', hour12: false };
+            var fechaHoraActual = ahora.toLocaleString('es-CR', opcionesFechaHora);
+    
+            // Separar la fecha y la hora
+            var [fecha, hora] = fechaHoraActual.split(', ');
+    
+            // Formatear la fecha en el formato adecuado
+            var dd = ahora.getDate();
+            var mm = ahora.getMonth() + 1; // +1 porque los meses comienzan en 0
+            var yyyy = ahora.getFullYear();
+    
+            // Ajustar el formato de la fecha
+            fecha = yyyy + '-' + mm + '-' + dd;
+    
+            // Actualizar los campos de fecha y hora
             document.getElementById('fecha').value = fecha;
+            document.getElementById('hora').value = hora;
         }
-
-        // Actualizar la hora cada segundo
-        setInterval(actualizarHora, 1000);
-
+    
+        // Actualizar la fecha y hora cada segundo
+        setInterval(actualizarFechaHora, 1000);
+    
         // Desactivar la edición del campo de la hora
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('hora').readOnly = true;

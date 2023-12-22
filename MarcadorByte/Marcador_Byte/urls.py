@@ -6,6 +6,8 @@ urlpatterns = [
     path('viewmarca/', views.viewmarca, name='viewmarca'),
     path('viewmarcasalida/', views.viewmarcasalida, name='viewmarcasalida'),
     path('viewingresoempleado/', views.viewingresoempleado, name='viewingresoempleado'),
+    path('ListaMarcasEntrada/', views.ListaMarcasEntrada, name='ListaMarcasEntrada'),
+    path('ListaMarcasSalida/', views.ListaMarcasSalida, name='ListaMarcasSalida'),
     
     
     

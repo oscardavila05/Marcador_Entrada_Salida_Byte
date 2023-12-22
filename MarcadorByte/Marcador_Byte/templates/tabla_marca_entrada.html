@@ -1,0 +1,35 @@
+{% extends "./index.html" %}
+
+
+{% block title %} Gestión de Cursos {% endblock %}
+{% block body %}
+<div class="container py-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido1</th>
+                <th scope="col">Apellido2</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for marcaentrada in marcasentrada %}
+            <tr>
+                <th scope="row">{{ marcaentrada.empleado_id }}</th>
+                <td>{{ marcaentrada.empleado.nombre }}</td>
+                <td>{{ marcaentrada.empleado.apellido1 }}</td>
+                <td>{{ marcaentrada.empleado.apellido2 }}</td>
+                <td>{{ marcaentrada.fecha }}</td>
+                <td>{{ marcaentrada.hora }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+{% endblock %}
