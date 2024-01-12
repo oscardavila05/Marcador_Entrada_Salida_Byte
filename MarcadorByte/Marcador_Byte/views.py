@@ -6,6 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
     return render(request, 'index.html')
+def supervisor_panel(request):
+    return render(request, 'supervisor_panel.html')
 
 def ListaMarcasEntrada(request):
     marcasentrada= Marcas.objects.all()
@@ -99,3 +101,24 @@ def viewingresoempleado(request):
 
     return render(request, 'viewingresoempleado.html')
 
+
+from django.shortcuts import render, get_object_or_404
+from .models import Empleado, Marcas
+
+def buscar_marca_individual(request):
+
+    if request.method == 'POST':
+        empleado_id = request.POST.get('empleado_id')
+
+        try:
+            empleado_info = {
+                'empleado': get_object_or_404(Empleado, empleado_id=empleado_id),
+                'marcas': Marcas.objects.filter(empleado__empleado_id=empleado_id),
+                'marcas2': Marcas2.objects.filter(empleado__empleado_id=empleado_id)
+            }
+            return render(request, 'buscar_marca_individual.html', {'empleado_info': empleado_info})
+        except:
+            # Maneja el caso en que no se encuentra el empleado
+            return render(request, 'buscar_marca_individual.html', {'empleado_info': None})
+
+    return render(request, 'buscar_marca_individual.html', {'empleado_info': None})
